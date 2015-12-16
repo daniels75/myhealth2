@@ -1,5 +1,14 @@
 # myhealth
 
+
+1. bower install bootstrap-material-design --save
+1.1. grunt wiredep
+1.2 removed line from index.html
+ <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+ 
+2.
+
+
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
