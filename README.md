@@ -7,7 +7,30 @@
  <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
  
 2.
-
+Everything is configured, generating the entity...
+   create .jhipster\Points.json
+   create src\main\java\org\daniels\jhipster\myhealth\domain\Points.java
+   create src\main\java\org\daniels\jhipster\myhealth\repository\PointsRepository.java
+   create src\main\java\org\daniels\jhipster\myhealth\web\rest\PointsResource.java
+   create src\main\resources\config\liquibase\changelog\20151217173640_added_entity_Points.xml
+   create src\main\webapp\scripts\app\entities\points\pointss.html
+   create src\main\webapp\scripts\app\entities\points\points-detail.html
+   create src\main\webapp\scripts\app\entities\points\points-dialog.html
+   create src\main\webapp\scripts\app\entities\points\points-delete-dialog.html
+   create src\main\webapp\scripts\app\entities\points\points.js
+   create src\main\webapp\scripts\app\entities\points\points.controller.js
+   create src\main\webapp\scripts\app\entities\points\points-dialog.controller.js
+   create src\main\webapp\scripts\app\entities\points\points-delete-dialog.controller.js
+   create src\main\webapp\scripts\app\entities\points\points-detail.controller.js
+   create src\test\javascript\spec\app\entities\points\points-detail.controller.spec.js
+   create src\main\webapp\scripts\components\entities\points\points.service.js
+   create src\test\java\org\daniels\jhipster\myhealth\web\rest\PointsResourceIntTest.java
+   create src\test\gatling\simulations\PointsGatlingTest.scala
+   create src\main\webapp\i18n\en\points.json
+   create src\main\webapp\i18n\fr\points.json
+   
+ 3.
+ 
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
