@@ -6,5 +6,8 @@
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20151217173640_added_entity_Points.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151218215623_added_entity_Weight.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151218215937_added_entity_BloodPressure.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151218220456_added_entity_Preferences.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-005 - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

@@ -4,10 +4,14 @@
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
+            "about": "About",
             "jhipster-needle-003": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
                 "points": "Points",
+                "weight": "Weight",
+                "bloodPressure": "BloodPressure",
+                "preferences": "Preferences",
                 "jhipster-needle-004": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -16,7 +20,7 @@
                 "password": "Password",
                 "sessions": "Sessions",
                 "login": "Sign in",
-                "logout": "Sign out",
+                "logout": "Log out",
                 "register": "Register"
             },
             "admin": {
@@ -34,8 +38,8 @@
             "language": "Language"
         },
         "form": {
-            "username": "Username",
-            "username.placeholder": "Your username",
+            "username": "Login",
+            "username.placeholder": "Your login",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
@@ -83,6 +87,8 @@
             "cancel": "Cancel",
             "delete": "Delete",
             "edit": "Edit",
+            "new": "Add",
+            "search": "Search",
             "save": "Save",
             "view": "View"
         },

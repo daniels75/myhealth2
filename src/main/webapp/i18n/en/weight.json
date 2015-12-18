@@ -1,0 +1,24 @@
+{
+    "myhealthApp": {
+        "weight" : {
+            "home": {
+                "title": "Weigh-Ins",
+                "createLabel": "Add Weight",
+                "createOrEditLabel": "Edit your weight"
+            },
+            "created": "Weight added successfully.",
+            "updated": "Weight updated successfully.",
+            "deleted": "Weight deleted.",
+            "delete": {
+                "question": "Are you sure you want to delete this?"
+            },
+            "detail": {
+                "title": "View Weight"
+            },
+            "timestamp": "Date/Time",
+            "weight": "Weight (lbs)",
+            "user": "User",
+            "actions": "Actions"
+        }
+    }
+}
