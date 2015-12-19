@@ -16,9 +16,9 @@ Everything is configured, generating the entity...
    
    create src\main\resources\config\liquibase\changelog\20151217173640_added_entity_Points.xml
    
-   create src\main\webapp\scripts\app\entities\points\pointss.html
-   create src\main\webapp\scripts\app\entities\points\points-detail.html
-   create src\main\webapp\scripts\app\entities\points\points-dialog.html
+v   create src\main\webapp\scripts\app\entities\points\pointss.html
+v   create src\main\webapp\scripts\app\entities\points\points-detail.html
+v  create src\main\webapp\scripts\app\entities\points\points-dialog.html
    create src\main\webapp\scripts\app\entities\points\points-delete-dialog.html
    
    create src\main\webapp\scripts\app\entities\points\points.js
@@ -27,7 +27,7 @@ Everything is configured, generating the entity...
    create src\main\webapp\scripts\app\entities\points\points-delete-dialog.controller.js
    create src\main\webapp\scripts\app\entities\points\points-detail.controller.js
    create src\test\javascript\spec\app\entities\points\points-detail.controller.spec.js
-   create src\main\webapp\scripts\components\entities\points\points.service.js
+v create src\main\webapp\scripts\components\entities\points\points.service.js
    
    create src\test\java\org\daniels\jhipster\myhealth\web\rest\PointsResourceIntTest.java
    create src\test\gatling\simulations\PointsGatlingTest.scala
@@ -38,6 +38,7 @@ v   create src\main\webapp\i18n\fr\points.json
    look out
    search classes
    Date Json formatter - in User etc
+   search nie dziala
    
  3.
  

@@ -1,29 +1,24 @@
 
 <div>
-    <h2><span translate="myhealthApp.preferences.detail.title">Preferences</span> {{preferences.id}}</h2>
+    <h2><span translate="myhealthApp.preferences.detail.title">Preferences</span></h2>
     <div class="table-responsive">
         <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td>
-                    <span translate="myhealthApp.preferences.weekly_goal">Weekly_goal</span>
+                    <span translate="myhealthApp.preferences.weeklyGoal">Weekly Goal</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{preferences.weekly_goal}}</span>
+                    <input type="text" class="input-sm form-control" value="{{preferences.weeklyGoal}}" readonly>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="myhealthApp.preferences.weight_units">Weight_units</span>
+                    <span translate="myhealthApp.preferences.weightUnits">Weight Units</span>
                 </td>
                 <td>
-                    <span class="form-control-static" translate="{{'myhealthApp.Units.' + preferences.weight_units}}">{{preferences.weight_units}}</span>
+                    <span class="input-sm form-control readonly" translate="myhealthApp.Units.SELECT"
+                          translate-interpolation="messageformat" translate-values="{ VALUE: preferences.weightUnits }"></span>
                 </td>
             </tr>
             </tbody>
@@ -31,7 +26,7 @@
     </div>
 
     <button type="submit"
-            onclick="window.history.back()"
+            ui-sref="preferences"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>

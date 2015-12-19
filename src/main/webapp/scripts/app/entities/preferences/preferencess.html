@@ -1,13 +1,24 @@
 <div>
-    <h2 translate="myhealthApp.preferences.home.title">Preferencess</h2>
     <jh-alert></jh-alert>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" ui-sref="preferences.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span translate="myhealthApp.preferences.home.createLabel">Create a new Preferences</span>
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 translate="myhealthApp.preferences.home.title">Preferences</h2>
+        </div>
+        <div class="col-sm-5 text-right">
+            <form name="searchForm" class="form-inline">
+                <div class="form-group p-r">
+                    <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery"
+                           placeholder="{{'entity.action.search' | translate}}">
+                </div>
+                <button class="btn btn-info btn-sm" ng-click="search()"
+                        tooltip="{{'entity.action.search' | translate}}">
+                    <span class="glyphicon glyphicon-search"></span>
                 </button>
-            </div>
+                <button class="btn btn-primary btn-sm" ui-sref="preferences.new" ng-hide="preferencesList.length"
+                        tooltip="{{'entity.action.new' | translate}}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -15,33 +26,32 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="myhealthApp.preferences.weekly_goal">Weekly_goal</span></th>
-                    <th><span translate="myhealthApp.preferences.weight_units">Weight_units</span></th>
-                    <th></th>
+                    <th translate="global.field.id">ID</th>
+                    <th translate="myhealthApp.preferences.weeklyGoal">weeklyGoal</th>
+                    <th translate="myhealthApp.preferences.weightUnits">weightUnits</th>
+                    <th translate="myhealthApp.preferences.actions" class="col-md-3">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="preferences in preferencess track by preferences.id">
+                <tr ng-repeat="preferences in preferencess">
                     <td><a ui-sref="preferences.detail({id:preferences.id})">{{preferences.id}}</a></td>
-                    <td>{{preferences.weekly_goal}}</td>
-                    <td translate="{{'myhealthApp.Units.' + preferences.weight_units}}">{{preferences.weight_units}}</td>
+                    <td>{{preferences.weeklyGoal}}</td>
+                    <td>{{preferences.weightUnits}}</td>
                     <td>
-                        <button type="submit"
-                                ui-sref="preferences.detail({id:preferences.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="preferences.edit({id:preferences.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="preferences.delete({id:preferences.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
+                        <div class="btn-group m-n">
+                            <button type="submit" tooltip="{{'entity.action.view' | translate}}"
+                                    ui-sref="preferences.detail({id:preferences.id})" class="btn btn-info btn-xs">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </button>
+                            <button type="submit" tooltip="{{'entity.action.edit' | translate}}"
+                                    ui-sref="preferences.edit({id:preferences.id})" class="btn btn-primary btn-xs">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button type="submit" tooltip="{{'entity.action.delete' | translate}}"
+                                    ng-click="delete(preferences.id)" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

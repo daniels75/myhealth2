@@ -5,7 +5,7 @@ angular.module('myhealthApp')
         $stateProvider
             .state('points', {
                 parent: 'entity',
-                url: '/pointss',
+                url: '/points',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'myhealthApp.points.home.title'

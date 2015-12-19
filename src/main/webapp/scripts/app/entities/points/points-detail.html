@@ -1,21 +1,15 @@
 
 <div>
-    <h2><span translate="myhealthApp.points.detail.title">Points</span> {{points.id}}</h2>
+    <h2><span translate="myhealthApp.points.detail.title">Points</span></h2>
     <div class="table-responsive">
         <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td>
                     <span translate="myhealthApp.points.date">Date</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{points.date | date:'mediumDate'}}</span>
+                    <input type="text" class="input-sm form-control" value="{{points.date | date}}" readonly>
                 </td>
             </tr>
             <tr>
@@ -23,31 +17,31 @@
                     <span translate="myhealthApp.points.exercise">Exercise</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{points.exercise}}</span>
-                </td>
+                    <i class="glyphicon" ng-class="{'glyphicon-ok text-success': points.exercise,
+                                                    'glyphicon-remove text-danger': !points.exercise}"></i>                </td>
             </tr>
             <tr>
                 <td>
                     <span translate="myhealthApp.points.meals">Meals</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{points.meals}}</span>
-                </td>
+                    <i class="glyphicon" ng-class="{'glyphicon-ok text-success': points.meals,
+                                                    'glyphicon-remove text-danger': !points.meals}"></i>                </td>
             </tr>
             <tr>
                 <td>
                     <span translate="myhealthApp.points.alcohol">Alcohol</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{points.alcohol}}</span>
-                </td>
+                    <i class="glyphicon" ng-class="{'glyphicon-ok text-success': points.alcohol,
+                                                    'glyphicon-remove text-danger': !points.alcohol}"></i>                </td>
             </tr>
             <tr>
                 <td>
                     <span translate="myhealthApp.points.notes">Notes</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{points.notes}}</span>
+                    <input type="text" class="input-sm form-control" value="{{points.notes}}" readonly>
                 </td>
             </tr>
             <tr>
@@ -55,7 +49,7 @@
                     <span translate="myhealthApp.points.user">user</span>
                 </td>
                 <td>
-                    {{points.user.id}}
+                    <input type="text" class="input-sm form-control" value="{{points.user.login}}" readonly>
                 </td>
             </tr>
             </tbody>
@@ -63,7 +57,7 @@
     </div>
 
     <button type="submit"
-            onclick="window.history.back()"
+            ui-sref="points"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>

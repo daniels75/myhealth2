@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span translate="myhealthApp.weight.detail.title">Weight</span> {{weight.id}}</h2>
+    <h2><span translate="myhealthApp.weight.detail.title">Weight</span></h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -15,7 +15,7 @@
                     <span translate="myhealthApp.weight.timestamp">Timestamp</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{weight.timestamp | date:'medium'}}</span>
+                    <input type="text" class="input-sm form-control" value="{{weight.timestamp | date: 'short': 'UTC'}}" readonly>
                 </td>
             </tr>
             <tr>
@@ -23,7 +23,7 @@
                     <span translate="myhealthApp.weight.weight">Weight</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{weight.weight}}</span>
+                    <input type="text" class="input-sm form-control" value="{{weight.weight}}" readonly>
                 </td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                     <span translate="myhealthApp.weight.user">user</span>
                 </td>
                 <td>
-                    {{weight.user.id}}
+                    <input type="text" class="input-sm form-control" value="{{weight.user.login}}" readonly>
                 </td>
             </tr>
             </tbody>
@@ -39,7 +39,7 @@
     </div>
 
     <button type="submit"
-            onclick="window.history.back()"
+            ui-sref="weight"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
