@@ -1,5 +1,6 @@
 package org.daniels.jhipster.myhealth.repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.daniels.jhipster.myhealth.domain.Weight;
@@ -19,5 +20,5 @@ public interface WeightRepository extends JpaRepository<Weight, Long> {
 
     Page<Weight> findAllByOrderByTimestampDesc(Pageable pageable);
 
-    List<Weight> findAllByTimestampBetweenOrderByTimestampDesc(DateTime firstDate, DateTime secondDate);
+    List<Weight> findAllByTimestampBetweenOrderByTimestampDesc(ZonedDateTime firstDate, ZonedDateTime secondDate);
 }

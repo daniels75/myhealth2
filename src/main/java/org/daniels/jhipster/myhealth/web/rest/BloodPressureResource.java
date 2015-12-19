@@ -2,6 +2,8 @@ package org.daniels.jhipster.myhealth.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import com.google.common.collect.Lists;
 
 /**
@@ -123,12 +126,20 @@ public class BloodPressureResource {
     @RequestMapping(value = "/bp-by-days/{days}")
     @Timed
     public ResponseEntity<BloodPressureByPeriod> getByDays(@PathVariable int days) {
-        LocalDate today = new LocalDate();
-        LocalDate previousDate = today.minusDays(days);
-        DateTime daysAgo = previousDate.toDateTimeAtCurrentTime();
-        DateTime rightNow = today.toDateTimeAtCurrentTime();
-
+//        LocalDate today = new LocalDate();
+//        LocalDate previousDate = today.minusDays(days);
+//        DateTime daysAgo = previousDate.toDateTimeAtCurrentTime();
+//        DateTime rightNow = today.toDateTimeAtCurrentTime();
+        
+        
+        java.time.LocalDate today = java.time.LocalDate.now();
+        java.time.LocalDate previousDate = today.minusDays(days);
+        ZonedDateTime daysAgo = previousDate.atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime rightNow = today.atStartOfDay(ZoneId.systemDefault());
+        
+        ZonedDateTime zonedaysAgo = ZonedDateTime.now();
         List<BloodPressure> readings = bloodPressureRepository.findAllByTimestampBetweenOrderByTimestampDesc(daysAgo, rightNow);
+        System.out.println("----------------------------------------");
         BloodPressureByPeriod response = new BloodPressureByPeriod("Last " + days + " Days", filterByUser(readings));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -139,12 +150,19 @@ public class BloodPressureResource {
     @RequestMapping(value = "/bp-by-month/{date}")
     @Timed
     public ResponseEntity<BloodPressureByPeriod> getByMonth(@PathVariable @DateTimeFormat(pattern = "yyyy-MM") LocalDate date) {
-        LocalDate firstDay = date.dayOfMonth().withMinimumValue();
-        LocalDate lastDay = date.dayOfMonth().withMaximumValue();
+     LocalDate firstDay = date.dayOfMonth().withMinimumValue();
+      LocalDate lastDay = date.dayOfMonth().withMaximumValue();
 
+        
+        java.time.LocalDate firstDay1 = java.time.LocalDate.now().withMonth(date.getMonthOfYear());
+        java.time.LocalDate lastDay1 = java.time.LocalDate.now().withMonth(date.getMonthOfYear());
+        ZonedDateTime firstDayZoned = firstDay1.atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime lastDayZoned = lastDay1.atStartOfDay(ZoneId.systemDefault());
+        
+        
         List<BloodPressure> readings = bloodPressureRepository.
-            findAllByTimestampBetweenOrderByTimestampDesc(firstDay.toDateTimeAtStartOfDay(),
-                                                          lastDay.plusDays(1).toDateTimeAtStartOfDay());
+            findAllByTimestampBetweenOrderByTimestampDesc(firstDayZoned, lastDayZoned);
+                                                          //lastDay.plusDays(1).toDateTimeAtStartOfDay());
 
         DateTimeFormatter fmt = org.joda.time.format.DateTimeFormat.forPattern("yyyy-MM");
         String yearAndMonth = fmt.print(firstDay);

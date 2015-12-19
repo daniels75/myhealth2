@@ -12,5 +12,6 @@
     <include file="classpath:config/liquibase/changelog/20151201165025_added_entity_BloodPressure.xml" relativeToChangelogFile="false"/>
 	<include file="classpath:config/liquibase/changelog/20151201173242_changed_column_type_Weight.xml" relativeToChangelogFile="false"/>
 	
+    <include file="classpath:config/liquibase/changelog/20151219191623_added_entity_DateEntity.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-005 - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

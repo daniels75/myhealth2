@@ -2,6 +2,8 @@ package org.daniels.jhipster.myhealth.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -128,7 +130,12 @@ public class WeightResource {
         DateTime daysAgo = previousDate.toDateTimeAtCurrentTime();
         DateTime rightNow = today.toDateTimeAtCurrentTime();
 
-        List<Weight> weighIns = weightRepository.findAllByTimestampBetweenOrderByTimestampDesc(daysAgo, rightNow);
+        java.time.LocalDate today1 = java.time.LocalDate.now();
+        java.time.LocalDate previousDate1 = today1.minusDays(days);
+        ZonedDateTime daysAgo1 = previousDate1.atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime rightNow1 = today1.atStartOfDay(ZoneId.systemDefault());
+        
+        List<Weight> weighIns = weightRepository.findAllByTimestampBetweenOrderByTimestampDesc(daysAgo1, rightNow1);
         WeightByPeriod response = new WeightByPeriod("Last " + days + " Days", filterByUser(weighIns));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -144,9 +151,14 @@ public class WeightResource {
         LocalDate firstDay = date.dayOfMonth().withMinimumValue();
         LocalDate lastDay = date.dayOfMonth().withMaximumValue();
 
+        java.time.LocalDate today1 = java.time.LocalDate.now();
+        java.time.LocalDate previousDate1 = java.time.LocalDate.now();
+        ZonedDateTime daysAgo1 = previousDate1.atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime rightNow1 = today1.atStartOfDay(ZoneId.systemDefault());
+        
         List<Weight> weighIns = weightRepository.
-            findAllByTimestampBetweenOrderByTimestampDesc(firstDay.toDateTimeAtStartOfDay(),
-                lastDay.plusDays(1).toDateTimeAtStartOfDay());
+            findAllByTimestampBetweenOrderByTimestampDesc(daysAgo1,
+            		rightNow1);
 
         DateTimeFormatter fmt = org.joda.time.format.DateTimeFormat.forPattern("yyyy-MM");
         String yearAndMonth = fmt.print(firstDay);

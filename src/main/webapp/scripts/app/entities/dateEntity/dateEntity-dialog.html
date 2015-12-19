@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDateEntityLabel" translate="myhealthApp.dateEntity.home.createOrEditLabel">Create or edit a DateEntity</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="dateEntity.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myhealthApp.dateEntity.firstDate" for="field_firstDate">FirstDate</label>
+            <input type="date" class="form-control" name="firstDate" id="field_firstDate"
+                    ng-model="dateEntity.firstDate"
+                    required />
+            <div ng-show="editForm.firstDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.firstDate.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myhealthApp.dateEntity.secondDate" for="field_secondDate">SecondDate</label>
+            <input type="datetime-local" class="form-control" name="secondDate" id="field_secondDate"
+                    ng-model="dateEntity.secondDate"
+                    required />
+            <div ng-show="editForm.secondDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.secondDate.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.secondDate.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myhealthApp.dateEntity.test" for="field_test">Test</label>
+            <input type="number" class="form-control" name="test" id="field_test"
+                    ng-model="dateEntity.test"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

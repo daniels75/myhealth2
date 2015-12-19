@@ -1,5 +1,6 @@
 package org.daniels.jhipster.myhealth.repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.daniels.jhipster.myhealth.domain.BloodPressure;
@@ -19,5 +20,5 @@ public interface BloodPressureRepository extends JpaRepository<BloodPressure,Lon
 
     Page<BloodPressure> findAllByOrderByTimestampDesc(Pageable pageable);
 
-    List<BloodPressure> findAllByTimestampBetweenOrderByTimestampDesc(DateTime firstDate, DateTime secondDate);
+    List<BloodPressure> findAllByTimestampBetweenOrderByTimestampDesc(ZonedDateTime firstDate, ZonedDateTime secondDate);
 }

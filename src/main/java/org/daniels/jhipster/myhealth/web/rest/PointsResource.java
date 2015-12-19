@@ -2,6 +2,9 @@ package org.daniels.jhipster.myhealth.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.DayOfWeek;
+import java.time.Year;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
@@ -126,8 +129,14 @@ public class PointsResource {
 		LocalDate endOfWeek = now.withDayOfWeek(DateTimeConstants.SUNDAY);
 		log.debug("Looking for points between: {} and {}", startOfWeek, endOfWeek);
 
-		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(startOfWeek, endOfWeek,
+		System.out.println("------------------------------------------------------");
+		java.time.LocalDate startOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		// Get last day of week
+		java.time.LocalDate endOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+
+		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(startOfWeek1, endOfWeek1,
 				SecurityUtils.getCurrentLogin().getUsername());
+		System.out.println("------------------------------------------------------");
 		return calculatePoints(startOfWeek, points);
 	}
 
@@ -147,7 +156,12 @@ public class PointsResource {
 			@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate) {
 		// Get last day of week
 		LocalDate endOfWeek = startDate.withDayOfWeek(DateTimeConstants.SUNDAY);
-		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(startDate, endOfWeek,
+		
+		java.time.LocalDate startOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		// Get last day of week
+		java.time.LocalDate endOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+		
+		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(startOfWeek1, endOfWeek1,
 				SecurityUtils.getCurrentLogin().getUsername());
 		return calculatePoints(startDate, points);
 	}
@@ -161,7 +175,13 @@ public class PointsResource {
 			@PathVariable @DateTimeFormat(pattern = "yyyy-MM") LocalDate yearWithMonth) {
 		// Get ast day of the month
 		LocalDate endOfMonth = yearWithMonth.dayOfMonth().withMaximumValue();
-		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(yearWithMonth, endOfMonth,
+		
+		
+		java.time.LocalDate yearWithMonth1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		// Get last day of week
+		java.time.LocalDate endOfMonth1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+		
+		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(yearWithMonth1, endOfMonth1,
 				SecurityUtils.getCurrentLogin().getUsername());
 		PointsPerMonth pointsPerMonth = new PointsPerMonth(yearWithMonth, points);
 		return new ResponseEntity<>(pointsPerMonth, HttpStatus.OK);

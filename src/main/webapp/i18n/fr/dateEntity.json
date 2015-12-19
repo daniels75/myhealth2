@@ -1,0 +1,24 @@
+{
+    "myhealthApp": {
+        "dateEntity" : {
+            "home": {
+                "title": "DateEntitys",
+                "createLabel": "Créer un nouveau DateEntity",
+                "createOrEditLabel": "Créer ou éditer un DateEntity"
+            },
+            "created": "Un nouveau DateEntity a été créé avec l'identifiant {{ param }}",
+            "updated": "Le DateEntity avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le DateEntity avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le DateEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "DateEntity"
+            },
+            "firstDate": "FirstDate",
+            "secondDate": "SecondDate",
+            "test": "Test"
+        }
+    }
+}
+

@@ -17,7 +17,7 @@ public interface PointsRepository extends JpaRepository<Points,Long> {
     @Query("select points from Points points where points.user.login = ?#{principal.username} order by points.date desc")
     Page<Points> findAllForCurrentUser(Pageable pageable);
 
-    List<Points> findAllByDateBetweenAndUserLogin(LocalDate firstDate, LocalDate secondDate, String login);
+    List<Points> findAllByDateBetweenAndUserLogin(java.time.LocalDate firstDate, java.time.LocalDate secondDate, String login);
 
     Page<Points> findAllByOrderByDateDesc(Pageable pageable);
 }
