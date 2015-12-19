@@ -39,8 +39,9 @@ v   create src\main\webapp\i18n\fr\points.json
    search classes
    Date Json formatter - in User etc
    search nie dziala
+   add missing tests from 21points
    
- 3.
+ 3. database change -> liquibaseDiffChangelog
  
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
