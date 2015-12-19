@@ -8,28 +8,21 @@
     <property name="now" value="current_timestamp" dbms="postgresql"/>
 
     <!--
-        Added the entity Points.
+        Added the entity Preferences.
     -->
-    <changeSet id="20151130184335" author="jhipster">
-        <createTable tableName="POINTS">
+    <changeSet id="20151130184536" author="jhipster">
+        <createTable tableName="PREFERENCES">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="date" type="date">
+            <column name="weekly_goal" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="exercise" type="integer"/>
-            <column name="meals" type="integer"/>
-            <column name="alcohol" type="integer"/>
-            <column name="notes" type="varchar(255)"/>
-            <column name="user_id" type="bigint"/>
+            <column name="weight_units" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="POINTS"
-                                 constraintName="fk_points_user_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="JHI_USER"/>
-
     </changeSet>
+	
 </databaseChangeLog>

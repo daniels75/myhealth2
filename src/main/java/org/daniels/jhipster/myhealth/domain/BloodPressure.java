@@ -15,7 +15,7 @@ import java.util.Objects;
  * A BloodPressure.
  */
 @Entity
-@Table(name = "blood_pressure")
+@Table(name = "BLOODPRESSURE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BloodPressure implements Serializable {
 
@@ -27,17 +27,26 @@ public class BloodPressure implements Serializable {
     @Column(name = "timestamp", nullable = false)
     private ZonedDateTime timestamp;
 
-    @Column(name = "systolic")
+    @NotNull
+    @Column(name = "systolic", nullable = false)
     private Integer systolic;
 
-    @Column(name = "diastolic")
+    @NotNull
+    @Column(name = "diastolic", nullable = false)
     private Integer diastolic;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
-    
+    public BloodPressure() {}
+
+    public BloodPressure(ZonedDateTime dateTime, Integer systolic, Integer diastolic, User user) {
+        this.timestamp = dateTime;
+        this.systolic = systolic;
+        this.diastolic = diastolic;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
@@ -86,8 +95,12 @@ public class BloodPressure implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         BloodPressure bloodPressure = (BloodPressure) o;
-        return Objects.equals(id, bloodPressure.id);
+
+        if ( ! Objects.equals(id, bloodPressure.id)) return false;
+
+        return true;
     }
 
     @Override
@@ -98,10 +111,10 @@ public class BloodPressure implements Serializable {
     @Override
     public String toString() {
         return "BloodPressure{" +
-            "id=" + id +
-            ", timestamp='" + timestamp + "'" +
-            ", systolic='" + systolic + "'" +
-            ", diastolic='" + diastolic + "'" +
-            '}';
+                "id=" + id +
+                ", timestamp='" + timestamp + "'" +
+                ", systolic='" + systolic + "'" +
+                ", diastolic='" + diastolic + "'" +
+                '}';
     }
 }

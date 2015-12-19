@@ -17,7 +17,7 @@ import org.daniels.jhipster.myhealth.domain.enumeration.Units;
  * A Preferences.
  */
 @Entity
-@Table(name = "preferences")
+@Table(name = "PREFERENCES")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Preferences implements Serializable {
 
@@ -26,18 +26,16 @@ public class Preferences implements Serializable {
     private Long id;
 
     @NotNull
+    @Min(value = 10)
+    @Max(value = 21)
     @Column(name = "weekly_goal", nullable = false)
-    private Integer weekly_goal;
+    private Integer weeklyGoal;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "weight_units")
-    private Units weight_units;
+    @Column(name = "weight_units", nullable = false)
+    private Units weightUnits;
 
-    @OneToOne(mappedBy = "")
-    @JsonIgnore
-    private User user;
-
-    
     public Long getId() {
         return id;
     }
@@ -46,28 +44,20 @@ public class Preferences implements Serializable {
         this.id = id;
     }
 
-    public Integer getWeekly_goal() {
-        return weekly_goal;
+    public Integer getWeeklyGoal() {
+        return weeklyGoal;
     }
 
-    public void setWeekly_goal(Integer weekly_goal) {
-        this.weekly_goal = weekly_goal;
+    public void setWeeklyGoal(Integer weeklyGoal) {
+        this.weeklyGoal = weeklyGoal;
     }
 
-    public Units getWeight_units() {
-        return weight_units;
+    public Units getWeightUnits() {
+        return weightUnits;
     }
 
-    public void setWeight_units(Units weight_units) {
-        this.weight_units = weight_units;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setWeightUnits(Units weightUnits) {
+        this.weightUnits = weightUnits;
     }
 
     @Override
@@ -78,8 +68,12 @@ public class Preferences implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Preferences preferences = (Preferences) o;
-        return Objects.equals(id, preferences.id);
+
+        if ( ! Objects.equals(id, preferences.id)) return false;
+
+        return true;
     }
 
     @Override
@@ -90,9 +84,9 @@ public class Preferences implements Serializable {
     @Override
     public String toString() {
         return "Preferences{" +
-            "id=" + id +
-            ", weekly_goal='" + weekly_goal + "'" +
-            ", weight_units='" + weight_units + "'" +
-            '}';
+                "id=" + id +
+                ", weeklyGoal='" + weeklyGoal + "'" +
+                ", weightUnits='" + weightUnits + "'" +
+                '}';
     }
 }

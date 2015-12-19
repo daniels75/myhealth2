@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="daniels (generated)" id="1448910063107-1">
+      <addColumn tableName="JHI_USER">
+         <column name="preferences_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="daniels (generated)" id="1448910063107-2">
+      <addForeignKeyConstraint baseColumnNames="preferences_id"
+                               baseTableName="JHI_USER"
+                               constraintName="FK_1r5e40mq4hwtlyd9lemghc8su"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="PREFERENCES"/>
+   </changeSet>
+</databaseChangeLog>

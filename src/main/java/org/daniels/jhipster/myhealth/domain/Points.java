@@ -11,11 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+
 /**
  * A Points.
  */
 @Entity
-@Table(name = "points")
+@Table(name = "POINTS")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Points implements Serializable {
 
@@ -41,10 +42,18 @@ public class Points implements Serializable {
     private String notes;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
-    
+    public Points() {}
+
+    public Points(LocalDate date, Integer exercise, Integer meals, Integer alcohol, User user) {
+        this.date = date;
+        this.exercise = exercise;
+        this.meals = meals;
+        this.alcohol = alcohol;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
@@ -109,8 +118,12 @@ public class Points implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Points points = (Points) o;
-        return Objects.equals(id, points.id);
+
+        if ( ! Objects.equals(id, points.id)) return false;
+
+        return true;
     }
 
     @Override
@@ -121,12 +134,12 @@ public class Points implements Serializable {
     @Override
     public String toString() {
         return "Points{" +
-            "id=" + id +
-            ", date='" + date + "'" +
-            ", exercise='" + exercise + "'" +
-            ", meals='" + meals + "'" +
-            ", alcohol='" + alcohol + "'" +
-            ", notes='" + notes + "'" +
-            '}';
+                "id=" + id +
+                ", date='" + date + "'" +
+                ", exercise='" + exercise + "'" +
+                ", meals='" + meals + "'" +
+                ", alcohol='" + alcohol + "'" +
+                ", notes='" + notes + "'" +
+                '}';
     }
 }

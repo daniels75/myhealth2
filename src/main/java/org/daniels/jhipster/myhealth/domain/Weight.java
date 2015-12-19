@@ -27,13 +27,20 @@ public class Weight implements Serializable {
     @Column(name = "timestamp", nullable = false)
     private ZonedDateTime timestamp;
 
-    @Column(name = "weight")
+    @NotNull
+    @Column(name = "weight", nullable = false)
     private Double weight;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
+    public Weight() {}
+
+    public Weight(ZonedDateTime timestamp, Double weight, User user) {
+        this.timestamp = timestamp;
+        this.weight = weight;
+        this.user = user;
+    }
     
     public Long getId() {
         return id;

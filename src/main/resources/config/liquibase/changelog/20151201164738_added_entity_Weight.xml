@@ -8,26 +8,27 @@
     <property name="now" value="current_timestamp" dbms="postgresql"/>
 
     <!--
-        Added the entity Points.
+        Added the entity Weight.
     -->
-    <changeSet id="20151130184335" author="jhipster">
-        <createTable tableName="POINTS">
+    <changeSet id="20151201164738" author="jhipster">
+        <createTable tableName="WEIGHT">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="date" type="date">
+            <column name="timestamp" type="timestamp">
                 <constraints nullable="false" />
             </column>
-            <column name="exercise" type="integer"/>
-            <column name="meals" type="integer"/>
-            <column name="alcohol" type="integer"/>
-            <column name="notes" type="varchar(255)"/>
+            <column name="weight" type="bigint">
+                <constraints nullable="false" />
+            </column>
             <column name="user_id" type="bigint"/>
         </createTable>
+        <dropDefaultValue tableName="WEIGHT" columnName="timestamp" columnDataType="datetime"/>
+
         
         <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="POINTS"
-                                 constraintName="fk_points_user_id"
+                                 baseTableName="WEIGHT"
+                                 constraintName="fk_weight_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="JHI_USER"/>
 

@@ -60,7 +60,7 @@ public final class SecurityUtils {
      *
      * @return the current user
      */
-    public static User getCurrentUser() {
+    public static User getCurrentLogin() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         if (authentication != null) {
@@ -76,7 +76,7 @@ public final class SecurityUtils {
      *
      * <p>The name of this method comes from the isUserInRole() method in the Servlet API</p>
      */
-    public static boolean isCurrentUserInRole(String authority) {
+    public static boolean isUserInRole(String authority) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         if (authentication != null) {

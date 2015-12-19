@@ -2,8 +2,10 @@
 
 angular.module('myhealthApp')
     .factory('Points', function ($resource, DateUtils) {
-        return $resource('api/pointss/:id', {}, {
+        return $resource('api/points/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'thisWeek': { method: 'GET', isArray: false, url: 'api/points-this-week'},
+            'byMonth': { method: 'GET', isArray: false, url: 'api/points-by-month/:month'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
@@ -13,15 +15,11 @@ angular.module('myhealthApp')
                 }
             },
             'update': {
-                method: 'PUT',
-                transformRequest: function (data) {
-                    data.date = DateUtils.convertLocaleDateToServer(data.date);
-                    return angular.toJson(data);
-                }
+                method: 'PUT'
             },
             'save': {
                 method: 'POST',
-                transformRequest: function (data) {
+                transformRequest: function(data) {
                     data.date = DateUtils.convertLocaleDateToServer(data.date);
                     return angular.toJson(data);
                 }

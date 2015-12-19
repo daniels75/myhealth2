@@ -35,6 +35,10 @@ Everything is configured, generating the entity...
 v   create src\main\webapp\i18n\en\points.json
 v   create src\main\webapp\i18n\fr\points.json
    
+   look out
+   search classes
+   Date Json formatter - in User etc
+   
  3.
  
 
