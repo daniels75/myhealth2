@@ -5,6 +5,7 @@
                   tooltip="The greatest wealth is Health"></span>
         </div>
         <div class="col-md-8">
+
             <h1 ng-if="isAuthenticated() && account.firstName" translate="main.title"
                 translate-values="{name: '{{account.firstName}}'}">Welcome, Java Hipster!</h1>
 
@@ -13,6 +14,7 @@
             <p class="lead" translate="main.subtitle">This is your homepage</p>
 
             <div ng-switch="isAuthenticated()">
+                <h2>Authenticated</h2>
                 <div ng-switch-when="true">
                     <div class="row">
                         <div class="col-md-6 col-xs-5">

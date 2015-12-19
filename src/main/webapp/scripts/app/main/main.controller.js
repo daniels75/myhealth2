@@ -1,4 +1,4 @@
-use strict';
+'use strict';
 
 angular.module('myhealthApp')
     .controller('MainController', function ($scope, Chart, Principal, points, preferences, bpReadings, weights) {
