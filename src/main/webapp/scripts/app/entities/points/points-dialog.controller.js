@@ -4,6 +4,13 @@ angular.module('myhealthApp').controller('PointsDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Points', 'User',
         function($scope, $stateParams, $uibModalInstance, entity, Points, User) {
 
+            if (!entity.id) {
+                entity.date = new Date();
+                entity.exercise = 1;
+                entity.meals = 1;
+                entity.alcohol = 1;
+            }
+            
         $scope.points = entity;
         $scope.users = User.query();
         $scope.load = function(id) {

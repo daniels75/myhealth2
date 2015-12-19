@@ -68,11 +68,10 @@ public class PointsResource {
 			return ResponseEntity.badRequest().header("Failure", "A new points cannot already have an ID").body(null);
 		}
 		if (!SecurityUtils.isUserInRole(AuthoritiesConstants.ADMIN)) {
-			log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin());
+			log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin().getUsername());
 			points.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentLogin().getUsername()).get());
 		}
 		Points result = pointsRepository.save(points);
-		pointsRepository.save(result);
 		return ResponseEntity.created(new URI("/api/points/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert("points", result.getId().toString())).body(result);
 	}
@@ -129,12 +128,18 @@ public class PointsResource {
 		LocalDate endOfWeek = now.withDayOfWeek(DateTimeConstants.SUNDAY);
 		log.debug("Looking for points between: {} and {}", startOfWeek, endOfWeek);
 
+		
+		java.time.LocalDate today = java.time.LocalDate.now();
+		java.time.LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		java.time.LocalDate sunday = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+		
 		System.out.println("------------------------------------------------------");
 		java.time.LocalDate startOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		
 		// Get last day of week
-		java.time.LocalDate endOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+		java.time.LocalDate endOfWeek1 = java.time.LocalDate.now().with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(startOfWeek1, endOfWeek1,
+		List<Points> points = pointsRepository.findAllByDateBetweenAndUserLogin(monday, sunday,
 				SecurityUtils.getCurrentLogin().getUsername());
 		System.out.println("------------------------------------------------------");
 		return calculatePoints(startOfWeek, points);

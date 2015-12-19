@@ -69,7 +69,7 @@ public class WeightResource {
             return ResponseEntity.badRequest().header("Failure", "A new weight cannot already have an ID").body(null);
         }
         if (!SecurityUtils.isUserInRole(AuthoritiesConstants.ADMIN)) {
-            log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin());
+            log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin().getUsername());
             weight.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentLogin().getUsername()).get());
         }
   
@@ -169,7 +169,7 @@ public class WeightResource {
 
     private List<Weight> filterByUser(List<Weight> readings) {
         Stream<Weight> userReadings = readings.stream()
-            .filter(bp -> bp.getUser().getLogin().equals(SecurityUtils.getCurrentLogin()));
+            .filter(bp -> bp.getUser().getLogin().equals(SecurityUtils.getCurrentLogin().getUsername()));
         return userReadings.collect(Collectors.toList());
     }
 

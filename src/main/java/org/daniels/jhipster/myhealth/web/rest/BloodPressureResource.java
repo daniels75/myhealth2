@@ -71,7 +71,7 @@ public class BloodPressureResource {
             return ResponseEntity.badRequest().header("Failure", "A new bloodPressure cannot already have an ID").body(null);
         }
         if (!SecurityUtils.isUserInRole(AuthoritiesConstants.ADMIN)) {
-            log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin());
+            log.debug("No user passed in, using current user: {}", SecurityUtils.getCurrentLogin().getUsername());
             bloodPressure.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentLogin().getUsername()).get());
         }
         BloodPressure result = bloodPressureRepository.save(bloodPressure);
@@ -126,19 +126,12 @@ public class BloodPressureResource {
     @RequestMapping(value = "/bp-by-days/{days}")
     @Timed
     public ResponseEntity<BloodPressureByPeriod> getByDays(@PathVariable int days) {
-//        LocalDate today = new LocalDate();
-//        LocalDate previousDate = today.minusDays(days);
-//        DateTime daysAgo = previousDate.toDateTimeAtCurrentTime();
-//        DateTime rightNow = today.toDateTimeAtCurrentTime();
-        
-        
         java.time.LocalDate today = java.time.LocalDate.now();
-        java.time.LocalDate previousDate = today.minusDays(days);
-        ZonedDateTime daysAgo = previousDate.atStartOfDay(ZoneId.systemDefault());
-        ZonedDateTime rightNow = today.atStartOfDay(ZoneId.systemDefault());
+        java.time.LocalDate startDate = today.minusDays(days);
+        ZonedDateTime dataTimeFrom = startDate.atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime dataTimeTo = today.atStartOfDay(ZoneId.systemDefault());
         
-        ZonedDateTime zonedaysAgo = ZonedDateTime.now();
-        List<BloodPressure> readings = bloodPressureRepository.findAllByTimestampBetweenOrderByTimestampDesc(daysAgo, rightNow);
+        List<BloodPressure> readings = bloodPressureRepository.findAllByTimestampBetweenOrderByTimestampDesc(dataTimeFrom, dataTimeTo);
         System.out.println("----------------------------------------");
         BloodPressureByPeriod response = new BloodPressureByPeriod("Last " + days + " Days", filterByUser(readings));
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -173,7 +166,7 @@ public class BloodPressureResource {
 
     private List<BloodPressure> filterByUser(List<BloodPressure> readings) {
         Stream<BloodPressure> userReadings = readings.stream()
-            .filter(bp -> bp.getUser().getLogin().equals(SecurityUtils.getCurrentLogin()));
+            .filter(bp -> bp.getUser().getLogin().equals(SecurityUtils.getCurrentLogin().getUsername()));
         return userReadings.collect(Collectors.toList());
     }
 

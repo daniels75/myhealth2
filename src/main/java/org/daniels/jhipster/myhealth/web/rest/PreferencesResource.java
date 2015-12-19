@@ -63,7 +63,7 @@ public class PreferencesResource {
 
         Preferences result = preferencesRepository.save(preferences);
 
-        log.debug("Settings preferences for current user: {}", SecurityUtils.getCurrentLogin());
+        log.debug("Settings preferences for current user: {}", SecurityUtils.getCurrentLogin().getUsername());
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin().getUsername()).get();
         user.setPreferences(result);
         userRepository.save(user);
